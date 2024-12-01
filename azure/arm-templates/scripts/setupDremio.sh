@@ -3,7 +3,7 @@
 [ -z $DOWNLOAD_URL ] && DOWNLOAD_URL=http://download.dremio.com/community-server/dremio-community-LATEST.noarch.rpm
 if [ ! -f /opt/dremio/bin/dremio ]; then
   command -v yum >/dev/null 2>&1 || { echo >&2 "This script works only on Centos or Red Hat. Aborting."; exit 1; }
-  yum install -y java-1.8.0-openjdk-devel $DOWNLOAD_URL
+  yum install -y java-11-openjdk java-11-openjdk-devel $DOWNLOAD_URL
 fi
 
 service=$1
