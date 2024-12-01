@@ -6,39 +6,6 @@ if [ ! -f /opt/dremio/bin/dremio ]; then
   yum install -y java-11-openjdk java-11-openjdk-devel $DOWNLOAD_URL
 fi
 
-echo "Removing Java 8..."
-sudo yum remove -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
-if [ $? -eq 0 ]; then
-    echo "Java 8 removed successfully."
-else
-    echo "Failed to remove Java 8." >&2
-    exit 1
-fi
-
-# Install Java 11
-echo "Installing Java 11..."
-sudo yum install -y java-11-openjdk java-11-openjdk-devel
-if [ $? -eq 0 ]; then
-    echo "Java 11 installed successfully."
-else
-    echo "Failed to install Java 11." >&2
-    exit 1
-fi
-
-# Set Java 11 as the default
-JAVA_PATH="/usr/lib/jvm/java-11-openjdk-11.0.23.0.9-2.el7_9.x86_64/bin/java"
-echo "Setting Java 11 as default..."
-sudo alternatives --set java $JAVA_PATH
-if [ $? -eq 0 ]; then
-    echo "Java 11 set as default successfully."
-else
-    echo "Failed to set Java 11 as default." >&2
-    exit 1
-fi
-
-echo "Java upgrade script completed."
-
-
 service=$1
 if [ -z "$service" ]; then
    echo "Require the service to start - master, coordinator or executor"
